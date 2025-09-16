@@ -69,22 +69,17 @@ void menu()
 
 int calc_age(float current_inv, float avg_return, float monthly_investment, int age, float goal_yearly_r)
 {
-    int r_age = -1;
+    int r_age = age;
     float sum_inv = current_inv;
     float goal_amount = goal_yearly_r / 0.04;
 
-    if(goal_amount >= current_inv)
-    {
-        r_age = age;
-        cout << "You can already retire. Well done!\n";
-    }
-    else
+    if(goal_amount > current_inv)
     {
         r_age = age;
 
         do
         {
-            sum_inv = sum_inv * (1 + avg_return) + monthly_investment * 12 * (1 + avg_return) / 2;
+            sum_inv = sum_inv * (1 + avg_return/100.0) + monthly_investment * 12 * (1 + avg_return/100.0) / 2;
             r_age++;
         } while (sum_inv < goal_amount);
     }
