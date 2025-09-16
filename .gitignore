@@ -416,3 +416,9 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+#Vs code extras
+*.vscode/
+*.dSYM/
+main
+.DS_Store
