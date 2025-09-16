@@ -13,6 +13,19 @@ int main()
     {
         menu();
         cin >> choice;
+
+        switch(choice)
+        {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                cout << "Exiting....\n";
+                break;
+            default:
+                cout << "Wrong input. Choice must be between 1 and 3 inclusive!\n";
+        }
     } while (choice != 3);
     
 
