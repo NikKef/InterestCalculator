@@ -81,7 +81,7 @@ int main()
                     cout << "Assuming an average yearly return rate of " << RETURN_RATE * 100 << '%';
                     cout << " and a yearly withdrawal of 4" << '%' << " of your portfolio after retirement.\n";
                     cout << "You can retire at age " << retirement_age << " making monthly contributions of ";
-                    cout << fixed << setprecision(2) << monthly_inv << " with a yearly salary of ";
+                    cout << fixed << setprecision(2) << monthly_inv << " until then, with a yearly salary of ";
                     cout << fixed << setprecision(2) << yearly_sal << "\n";
                 }
                 else
