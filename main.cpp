@@ -1,5 +1,7 @@
 #include <iostream>
 #include <iomanip>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define RETURN_RATE 0.08
 
@@ -16,6 +18,8 @@ string eval_strat(int current_age, int retirement_age, float current_inv, float 
 
 int main()
 {
+    system("clear");
+
     int choice = -1;
 
     do
@@ -24,68 +28,71 @@ int main()
         cin >> choice;
 
         string msg;
+        float ci, mi, gy, ys, ar;
+        int ca, ra, a;
+
+        system("clear");
+        sleep(1);
 
         switch(choice)
         {
             case 1:
-                float ci, ar, mi, gy;
-                int a;
-
                 cout << "Enter your age:  ";
                 cin >> a;
-                cout << "Enter your current value of your investments/assets: ";
+                cout << "Enter your current value of your investments/assets: $";
                 cin >> ci;
                 cout << "Enter your average projected return percentage (Averge inflation-adjusted retun of the stock market is about 8%): ";
                 cin >> ar;
-                cout << "Enter the amount you project to invest monthly from now on: ";
+                cout << "Enter the amount you project to invest monthly from now on: $";
                 cin >> mi;
-                cout << "What is your yearly target salary from your investments for when you retire: ";
+                cout << "What is your yearly target salary from your investments for when you retire: $";
                 cin >> gy;
 
-                cout << "You can retire at age " << calc_age(ci, ar, mi, a, gy) << " earning " << fixed << setprecision(2) << gy << " per year from your investments.\n";
+                cout << "You can retire at age " << calc_age(ci, ar, mi, a, gy) << " earning $" << fixed << setprecision(2) << gy << " per year from your investments.\n";
                 cout << "Note! The calculation is done assuming that you can sell 4 percent of your assets every year.\n";
-                cout << "In this way, you can withdraw the amount of " << fixed << setprecision(2) << gy << " evry year without loosing any of principal amount while outpacing inflation\n";
+                cout << "In this way, you can withdraw the amount of $" << fixed << setprecision(2) << gy << " evry year without loosing any of principal amount while outpacing inflation\n";
+                
+                system( "read -n 1 -s -p \"Press any key to continue...\"" );
 
                 break;
             case 2:
-                int current_age, retirement_age;
-                float current_inv, monthly_inv, goal_yearly_r, yearly_sal;
-
                 cout << "Enter your age: ";
-                cin >> current_age;
+                cin >> ca;
                 cout << "Enter your target retirement age: ";
-                cin >> retirement_age;
-                while(retirement_age < current_age)
+                cin >> ra;
+                while(ra < ca)
                 {
                     cout << "Retirement age cannot be smaller than current age!\n";
                     cout << "Enter your target retirement age again: ";
-                    cin >> retirement_age;
+                    cin >> ra;
                 }
-                cout << "Enter the value of your investments/assets currently: ";
-                cin >> current_inv;
-                cout << "What is your yearly target salary from your investments for when you retire: ";
-                cin >> goal_yearly_r;
+                cout << "Enter the value of your investments/assets currently: $";
+                cin >> ci;
+                cout << "What is your yearly target salary from your investments for when you retire: $";
+                cin >> gy;
 
-                msg = eval_strat(current_age, retirement_age, current_inv, goal_yearly_r, monthly_inv, yearly_sal);
+                msg = eval_strat(ca, ra, ci, gy, mi, ys);
 
                 if(msg == "up")
                 {
                     cout << "You can retire wihtout making any further investments.\n";
                     cout << "Assuming an average yearly return rate of " << RETURN_RATE * 100 << '%';
                     cout << " and a yearly withdrawal of 4" << '%' << " of your portfolio aftre retirement.\n";
-                    cout << "Yearly salary at " << retirement_age << " and onwards: ";
-                    cout << fixed << setprecision(2) << yearly_sal << "\n";
+                    cout << "Yearly salary at " << ra << " and onwards: $";
+                    cout << fixed << setprecision(2) << ys << "\n";
                 }
                 else if(msg == "down")
                 {
                     cout << "Assuming an average yearly return rate of " << RETURN_RATE * 100 << '%';
                     cout << " and a yearly withdrawal of 4" << '%' << " of your portfolio after retirement.\n";
-                    cout << "You can retire at age " << retirement_age << " making monthly contributions of ";
-                    cout << fixed << setprecision(2) << monthly_inv << " until then, with a yearly salary of ";
-                    cout << fixed << setprecision(2) << yearly_sal << "\n";
+                    cout << "You can retire at age " << ra << " making monthly contributions of $";
+                    cout << fixed << setprecision(2) << mi << " until then, with a yearly salary of $";
+                    cout << fixed << setprecision(2) << ys << "\n";
                 }
                 else
                     cout << "Something went wrong. Try again.\n";
+                
+                system( "read -n 1 -s -p \"Press any key to continue...\"" );
 
                 break;
             case 3:
@@ -94,6 +101,9 @@ int main()
             default:
                 cout << "Wrong input. Choice must be between 1 and 3 inclusive!\n";
         }
+
+        system("clear");
+        sleep(1);
     } while (choice != 3);
     
 
@@ -102,6 +112,7 @@ int main()
 
 void menu()
 {
+    system("clear");
     cout << "                   ---------------------------------\n";
     cout << "                -------------------------------------\n";
     cout << "              ---------- Interest Calculator ----------\n";
